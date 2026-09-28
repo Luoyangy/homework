@@ -1,25 +1,14 @@
 #include "Book.h"
-#include "Student.h"        // 演示段要用到 Student
-#include "Bookshelf.h"      // 演示段要用到 Bookshelf
+#include "Student.h"
+#include "Bookshelf.h"
 #include <iostream>
-#include <windows.h>        // 注意：必须在 using 之前，顺序别动（详见项目进度.md 第八节）
+#include <windows.h>
 using namespace std;
 
-// ============================================================
-// 【实验二演示用】图书借阅过程
-//   学生 张三 从书架「图书馆一楼」借书，演示两种类关系：
-//     · 组合关系：书架 has 图书（Bookshelf 里嵌了 Book 数组）
-//     · 依赖关系：学生 use 图书（borrowBook 的参数是 Book&）
-// ============================================================
 void demoBorrow() {
 
     cout << "##### 实验二：组合关系 & 依赖关系 演示 #####" << endl << endl;
 
-    // ---------- 1. 建书架（组合关系）----------
-    // 注意！这一行会先在屏幕上刷出 10 行 Book 的构造信息：
-    //   书架里嵌了 Book books[10]，这 10 本书必须先"出生"，
-    //   才轮到 Bookshelf 自己的构造函数体执行。
-    //   这就是指导书实验思考题 1 的答案 —— 先构造内嵌成员，再构造本类。
     cout << "【1】创建书架（观察前面那 10 行 Book 构造信息）：" << endl;
     Bookshelf shelf("图书馆一楼");
     cout << endl;
@@ -51,10 +40,6 @@ void demoBorrow() {
     cout << endl;
 
     // ---------- 6. 再借同一本：失败 ----------
-    // 这一步是"依赖关系"的精髓：
-    //   b1 在【第 5 步】已经被借走了，它的 inLibrary 变成了 false。
-    //   现在再借，borrowBook 的第二道判断会拦住。
-    //   —— 说明第 5 步真的改到了 b1 本人（不是一份复印件）。
     cout << "【6】张三再借同一本《三体》（已借出）→ 应该失败：" << endl;
     stu.borrowBook(b1);
     cout << endl;
@@ -141,7 +126,7 @@ int main() {
     cout << endl << "===== 实验一演示结束（对象在 main 结束时自动析构）=====" << endl;
 
     cout << endl << endl;
-    demoBorrow();      // ← 实验二演示（组合关系 + 依赖关系）
+    demoBorrow();
 
     return 0;
 }
